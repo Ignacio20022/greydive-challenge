@@ -1,0 +1,35 @@
+.box{
+    flex-direction: column;
+    text-align: left;
+}
+
+a{
+    cursor: pointer;
+}
+
+h1{
+    text-align: left;
+}
+
+video{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.videoPlayer{
+    align-content: center;
+}
+
+.transcripcion div{
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.tareas div{
+
+}
+
+li{
+    list-style-type: none;
+}
