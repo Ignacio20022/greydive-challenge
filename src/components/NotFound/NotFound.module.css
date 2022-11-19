@@ -1,0 +1,9 @@
+.notFound{
+    place-items: center;
+}
+
+.notFound h1{
+    height: 100px;
+    font-size: 300px;
+    color: grey;
+}

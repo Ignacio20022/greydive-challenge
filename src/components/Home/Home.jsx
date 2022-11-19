@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import data from "../../../db.json";
+import data from "../../assets/db.json";
 import { useEffect } from "react";
 import styles from "./Home.module.css";
-import parser from "html-react-parser";
+import parserHTML from "html-react-parser";
 
 const Home = () => {
     const { id } = useParams();
@@ -10,10 +10,10 @@ const Home = () => {
     let item = []; // should be useSelector
     // const isLoading = useSelector((state) => state.isLoading)
     // const error = useSelector((state) => state.error)
-    if (!item.length) item = data.find((item) => item.idVideo === id);
 
+    if (!item.length) item = data[id - 1]
     useEffect(() => {
-        // dispatch(getData())
+        // dispatch getdata action
 
         return () => {
             if (item.length) {
@@ -25,21 +25,22 @@ const Home = () => {
     // if(isLoading) return <Loader />
     // if(error) return <Error />
 
-    console.log(item);
+    if(id && !item){
+        return (
+            <h1>No existe un testeador con la id {id}</h1>
+        )
+    }
+
     return (
         <div className={styles.box}>
             <h1>Cliente: {item.cliente}</h1>
-            <h3>
-                <a href={item.linkVideo} target='_blank'>
-                    Video
-                </a>
-            </h3>
+            <h2>Testeador {id}</h2>
             <div className={styles.videoPlayer}>
                 <video src={item.linkVideo} controls />
             </div>
             <div className={styles.transcripcion}>
                 <h2>Transcripción</h2>
-                <div>{parser(item.transcripcion)}</div>
+                <div>{parserHTML(item.transcripcion)}</div>
             </div>
             <div className={styles.tareas}>
                 <h1>Tareas</h1>
@@ -49,7 +50,8 @@ const Home = () => {
                     {item.preguntas?.map((pregunta, index) => (
                         <li key={index}>
                             <h3>Tarea {index + 1}</h3>
-                            <p>{pregunta.texto}</p>                                
+                            <p className={styles.texto}>{pregunta.texto.replaceAll('\\n', '\n')}</p>
+                            <p className={styles.duracion}>Duración de la tarea: {pregunta.tiempo}</p>
                             <hr></hr>
                         </li>
                     ))}

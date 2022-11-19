@@ -26,10 +26,14 @@ video{
     overflow-y: scroll;
 }
 
-.tareas div{
-
-}
-
 li{
     list-style-type: none;
+}
+
+.texto{
+    white-space: pre-line;
+}
+
+.duracion{
+    color: orange;
 }
