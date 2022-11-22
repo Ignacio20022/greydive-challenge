@@ -5,18 +5,20 @@ import styles from "./Home.module.css";
 import parserHTML from "html-react-parser";
 
 const Home = () => {
-    const { id } = useParams();
+    const { client, test } = useParams();
 
-    let item = []; // should be useSelector
+    // let item = []; // should be useSelector
     // const isLoading = useSelector((state) => state.isLoading)
     // const error = useSelector((state) => state.error)
 
-    if (!item.length) item = data[id - 1]
+    const videos = data.filter((video) => video.cliente === client)
+    const item = videos[test - 1]
+
     useEffect(() => {
         // dispatch getdata action
 
         return () => {
-            if (item.length) {
+            if (item) {
                 // dispatch clear state action
             }
         };
@@ -25,16 +27,17 @@ const Home = () => {
     // if(isLoading) return <Loader />
     // if(error) return <Error />
 
-    if(id && !item){
-        return (
-            <h1>No existe un testeador con la id {id}</h1>
-        )
+    if(!videos.length){
+        return <h1>No existe el cliente {client}</h1>
+    }
+    else if(!item){
+        return <h1>No existe el test {test} de {client}</h1>
     }
 
     return (
         <div className={styles.box}>
             <h1>Cliente: {item.cliente}</h1>
-            <h2>Testeador {id}</h2>
+            <h2>Test {test}</h2>
             <div className={styles.videoPlayer}>
                 <video src={item.linkVideo} controls />
             </div>

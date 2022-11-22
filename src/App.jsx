@@ -11,7 +11,7 @@ function App() {
         <BrowserRouter>
             <Switch>
                 <Route exact path="/" component={Landing} />
-                <Route exact path="/nombre-cliente-1mqw4z1sae3ddpxbyf6d/testeador-:id" component={Home}/>
+                <Route exact path="/:client/:test" component={Home}/>
                 <Route path="*" component={NotFound} />
             </Switch>
         </BrowserRouter>
